@@ -10,4 +10,33 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+zstyle ":completion:*:commands" rehash 1
+
 # Customize to your needs...
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/texlive/2015basic/bin/x86_64-darwin:$PATH
+
+# prompt_command for zsh
+#prmptcmd() { eval "$PROMPT_COMMAND" }
+#precmd_functions=(prmptcmd)
+source /Users/dhruv/projects/scripts/virtualenv-auto-activate.sh
+
+
+# python virtualenvs
+export WORKON_HOME=~/.Envs
+source /usr/local/bin/virtualenvwrapper.sh
+
+# set frameworkpython command
+function frameworkpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+    else
+        /usr/local/bin/python "$@"
+    fi
+}
+
+#load ruby rbenv
+eval "$(rbenv init -)"
+alias ed='ed -p:'
+alias tmux='tmux -2'
+alias v='vim'
